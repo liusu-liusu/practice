@@ -1,10 +1,10 @@
 ## practice
 小练习
-#### drag
+### drag
 一个拖拽
-#### myjuqery
+### myjuqery
 一个仿写的迷你半jq
-#### mypromise
+### mypromise
 仿写promise
-#### simpleVue
+### simpleVue
 一个非常迷你的响应式
