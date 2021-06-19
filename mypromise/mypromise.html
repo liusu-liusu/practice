@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的promise</title>
+</head>
+<body>
+<script type="module">
+import MyPromise from "./MyPromise.js";
+// 三种状态 pending fulfilled rejected
+ let p = new MyPromise((resolve,reject)=>{
+     setTimeout(()=>{
+         console.log(102)
+         // resolve("success");
+         reject("错误")
+     },1000)
+ })
+// console.log(p)
+
+// 多个then的问题
+// p.then(res=>{
+//     console.log(111,res)
+// })
+// p.then(res=>{
+//     console.log(222,res)
+// })
+// 执行顺序问题（宏观微观任务） 222->333->555->111->444
+// 222-333-555-444-111
+// setTimeout(()=>{
+//     console.log(111)
+// })
+// let p1 = new MyPromise((resolve,reject)=>{
+//     console.log(222);
+//     resolve("成功")
+// })
+// console.log(333)
+// p1.then(res=>{
+//     console.log(444,res)
+// })
+// console.log(555)
+
+// 链式操作 返回值问题
+let p2 = new MyPromise((resolve,reject)=>{
+    setTimeout(()=>{
+        console.log(101)
+        resolve("success2")
+    },800)
+})
+// p2.then(res=>{
+//     console.log(1,res)
+//     return new MyPromise((res,rej)=>{
+//         // res('haha')
+//         rej("heihei")
+//     })
+// }).then(res=>{
+//     console.log(2,res)
+// },rej=>{
+//     console.log(3,rej);
+// })
+
+// catch
+let p3 = new MyPromise((resolve,reject)=>{
+    setTimeout(()=>{
+        console.log(100)
+        // reject("拒绝了")
+        resolve("接受了")
+    },400)
+})
+// p3.then(res=>{
+//     console.log(4,res)
+// }).then(res=>{
+//     console.log(8,res)
+// }).catch(err=>{
+//     console.log(5,err)
+// })
+
+//finally
+// p3.then(res=>{
+//     console.log(6,res)
+// }).finally(()=>{
+//     console.log(7);
+// })
+
+// resolve
+// let p4 = MyPromise.resolve("success");
+//  console.log(p4);
+
+// reject
+// console.log(MyPromise.reject("fail"));
+
+// race
+// MyPromise.race([p,p2,p3]).then(res=>{
+//     console.log(9,res);
+// },rej=>{
+//     console.log(10,rej);
+// })
+
+// MyPromise.allSettled([p,p2,p3]).then(res=>{
+//     console.log(11, res);
+// })
+MyPromise.all([p,p2,p3]).then(res=>{
+    console.log(res)
+})
+
+
+</script>
+</body>
+</html>

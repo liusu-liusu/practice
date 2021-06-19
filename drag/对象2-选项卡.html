@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>选项卡</title>
+	<style>
+		.tab{
+			width: 200px;
+			height: 200px;
+			border: 1px solid #000;
+			display: none;
+		}
+		.active{
+			background: yellow;
+		}
+	</style>
+	<script type="text/javascript">	
+
+		window.onload= function () {
+			
+			var otab = new Tab("tab1");
+			otab.init();
+			var otab2 = new Tab("tab2");
+			otab2.init();
+		}
+
+		function Tab(id){
+			this.odiv = document.getElementById(id);
+			this.ainput = this.odiv.getElementsByTagName("input");
+			this.ardiv = this.odiv.getElementsByTagName("div");
+			this.len=this.ainput.length
+		}
+
+		Tab.prototype.init= function(){
+			var This = this;
+			for(var i=0; i<this.len; i++ ){
+				this.ainput[i].index = i;
+				this.ainput[i].onclick = function(){
+					This.tab(this);
+				};
+			}
+		}
+
+		Tab.prototype.tab=function(obj){
+
+			for(var j = 0; j < this.len; j++){
+				this.ainput[j].setAttribute("class", "");
+				this.ardiv[j].style.display = "none";
+			}
+			obj.setAttribute("class", "active");
+			this.ardiv[obj.index].style.display = "block";
+		}
+
+	</script>
+</head>
+<body>
+	<div id="tab1">
+		<input type="button" value="1" class="active">
+		<input type="button" value="2">
+		<input type="button" value="3">
+		<div class="tab" style="display:block;">1111</div>
+		<div class="tab">1222</div>
+		<div class="tab">1333</div>
+	</div>
+	<div id="tab2">
+		<input type="button" value="1" class="active">
+		<input type="button" value="2">
+		<input type="button" value="3">
+		<div class="tab" style="display:block;">1111</div>
+		<div class="tab">1222</div>
+		<div class="tab">1333</div>
+	</div>
+	
+</body>
+</html>

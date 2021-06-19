@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>仿写的vue</title>
+<!--  <script src="mvue.js"></script>-->
+  <script src="mvue2.js"></script>
+</head>
+<body>
+  <div id="app">
+      <input type="text" v-model="message">
+    <div>{{message}}</div>
+    {{message}}----{{news}}-----{{message}}
+      <div v-text="txt"></div>
+      <div v-html="txt"></div>
+  </div>
+  <script>
+      let mv = new MVue({
+          el: "#app",
+          data: {
+              message: "odlValue",
+              news: "新闻",
+              txt:'<h1>哈哈哈！我来啦~</h1>'
+          }
+      })
+      setTimeout(()=>{
+          mv._data.message = "新数据"
+          mv._data.txt = "<h4>来了就来了，用得着这么高调嘛~</h4>"
+      }, 1000)
+  </script>
+</body>
+</html>

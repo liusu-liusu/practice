@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>封装自己的jq</title>
+	<script src="myjq.js"></script>
+</head>
+<body>
+<div class="box">请点击我吧</div>
+<div class="box" style="background: pink;">请点击我吧</div>
+<button id="btn">开始运动</button>
+<script>
+
+$(function (){
+	console.log("页面加载完成")
+})
+
+// let eles = $(".box");
+// eles.click((event)=>{
+// 	console.log(event);
+// 	console.log("click")
+// })
+
+// $(document.querySelectorAll('.box')).click(()=>{
+// 	console.log(777)
+// })
+
+// $(".box").on("mouseover mousedown", ()=>{
+// 	console.log("鼠标鼠标")
+// })
+
+// $(".box").on("mouseover", ()=>{
+// 	console.log("移入")
+// }).on("mousedown", ()=>{
+// 	console.log("按下")
+// })
+
+// console.log($(".box").eq(0))
+// console.log($(".box").eq(0).end())
+
+$(".box").eq(0).end().click(function (){
+	console.log("eq0")
+	$(this).css("background", 'red');
+})
+
+// $("div").css({width:"100px",height:"100px",background:"blue"});
+$("div").css({width:100,height:"100px",background:"blue",opacity: 0.4});
+console.log($(".box").css("backgroundColor"))
+
+$.cssHooks.wh = {
+	get(ele){
+		// console.log("get",ele);
+		return getComputedStyle(ele,null)['width'] + "-" + getComputedStyle(ele,null)['height'];
+	},
+	set(ele,styleValue){
+		// console.log("set",ele,styleValue);
+		ele.style['width'] = styleValue;
+		ele.style['height'] = styleValue;
+	}
+}
+
+// $("div").css("wh",300);
+console.log($("div").css("wh"));
+
+$("div").eq(1).click(function (){
+	$(this).animate({width: 300})
+})
+
+$("#btn").click(function (){
+	// $(".box").animate({width: 200, opacity: 1}, ()=>{
+	// 	$(".box").animate({height: '70px'})
+	// })
+	$(".box").animate({width:200, height: 200, opacity: 1})
+})
+
+</script>
+</body>
+</html>
